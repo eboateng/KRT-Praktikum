@@ -22,7 +22,7 @@ run('helikopter')
 %Solve for numerical values for the equations
 theta_a = vpa(subs(theta_a)); 
 theta_b = vpa(theta_a);
-theta_c = vpa(subs((m*(0.5*L3)^2)/6));
+theta_c = vpa(subs(theta_c));
 alpha_dd = vpa(subs(alpha_dd));
 beta_dd = vpa(subs(beta_dd));
 gamma_dd = vpa(subs(gamma_dd));
@@ -34,4 +34,18 @@ B = jacobian(x_d, [F_f, F_b]);
 %C = ;
 D = zeros(size(B))
 
-plant = ss(A,B,C,D);
+%plant = ss(A,B,C,D);
+
+%Assume Travel, pitch, elevation begin at 0
+alpha = 0;
+beta = 0;
+gamma = 0;
+
+%Check stability of the system
+Eig_A = eig(vpa(subs(A)));
+if sign(Eig_A) > 0
+    warning("Eigenvalues of A matrix indicate instability")
+    
+else
+end
+    
