@@ -1,0 +1,14 @@
+function [V_front V_back] = model_voltage(data, F_f ,F_b)
+ 
+data=load('data1.mat')
+
+M = data.M;
+Frontmotor = M.F;
+Backmotor = M.B;
+U_v = data.U.F;
+coeff_front = polyfit(U_v,Frontmotor,2)
+coeff_back = polyfit(U_v,Backmotor,2)
+
+%V_front = coeff_front(1)*x^2 + coeff_front(1);
+%V_back = ;
+end
