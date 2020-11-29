@@ -20,12 +20,12 @@ x_d = [alpha_d beta_d gamma_d alpha_dd beta_dd gamma_dd]';
 run('helikopter')
 
 %Solve for numerical values for the equations
-theta_a = vpa(subs(theta_a)); 
+theta_a = vpa(theta_a)); 
 theta_b = vpa(theta_a);
-theta_c = vpa(subs(theta_c));
-alpha_dd = vpa(subs(alpha_dd));
-beta_dd = vpa(subs(beta_dd));
-gamma_dd = vpa(subs(gamma_dd));
+theta_c = vpa(theta_c));
+alpha_dd = vpa(alpha_dd);
+beta_dd = vpa(beta_dd);
+gamma_dd = vpa(gamma_dd);
 
 
 %Linearization and State space system
@@ -45,7 +45,6 @@ gamma = 0;
 Eig_A = eig(vpa(subs(A)));
 if sign(Eig_A) > 0
     warning("Eigenvalues of A matrix indicate instability")
-    
 else
 end
     
