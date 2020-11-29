@@ -35,4 +35,3 @@ B = jacobian(x_d, [F_f, F_b]);
 D = zeros(size(B))
 
 plant = ss(A,B,C,D);
-Eig_A = eig(A);
