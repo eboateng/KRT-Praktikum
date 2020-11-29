@@ -2,6 +2,7 @@
 % Open-Loop State-Space Matrices: A, B, C, and D
 % for the Quanser 3-DOF Helicopter Experiment.
 
+
 A( 1, 1 ) = 0;
 A( 1, 2 ) = 0;
 A( 1, 3 ) = 0;
