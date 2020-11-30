@@ -39,7 +39,7 @@ B_mat = jacobian(x_d, [F_f, F_b]);
 C = [eye(3); zeros(3,3)]';
 D = zeros(size(3,2));
 
-[F_f, F_b] = model_voltage();
+[F_f, F_b] = model_voltage(V_f,V_b);
 
 A = double((subs(A_mat)));
 B = double((subs(B_mat)));
