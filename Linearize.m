@@ -35,15 +35,15 @@ gamma_dd = vpa(subs(gamma_dd));
 
 
 %Linearization and State space system
-A_mat = jacobian(x_d, x)
-B_mat = jacobian(x_d, [F_f, F_b])
+A_mat = jacobian(x_d, x);
+B_mat = jacobian(x_d, [F_f, F_b]);
 C = [eye(3); zeros(3,3)]';
-D = zeros(size(C));
+D = zeros(size(3,2));
 
 [F_f, F_b] = model_voltage()
 
-A = double(vpa(subs(A_mat)))
-B = double(vpa(subs(B_mat)))
+A = double((subs(A_mat)));
+B = double((subs(B_mat)));
 
 plant = ss(A,B,C,D);
 
