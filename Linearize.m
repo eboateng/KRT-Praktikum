@@ -21,18 +21,17 @@ run('helikopter')
 
 %Assume Travel, pitch, elevation begin at 0
 alpha = 0;
-beta = 0;
+beta = -27.5*pi/180; % initial elevation is offset
 gamma = 0;
 
+
 %Solve for numerical values for the equations
-theta_a = vpa(subs(theta_a)); 
-theta_b = vpa(subs(theta_a));
-theta_c = vpa(subs(theta_c));
-alpha_dd = vpa(subs(alpha_dd));
+theta_a = double(subs(theta_a)); 
+theta_b = double(subs(theta_a));
+theta_c = double(subs(theta_c));
+alpha_dd = double(subs(alpha_dd));
 beta_dd = vpa(subs(beta_dd));
 gamma_dd = vpa(subs(gamma_dd));
-
-
 
 %Linearization and State space system
 A_mat = jacobian(x_d, x);
@@ -40,18 +39,22 @@ B_mat = jacobian(x_d, [F_f, F_b]);
 C = [eye(3); zeros(3,3)]';
 D = zeros(size(3,2));
 
-[F_f, F_b] = model_voltage()
+[F_f, F_b] = model_voltage();
 
 A = double((subs(A_mat)));
 B = double((subs(B_mat)));
 
 plant = ss(A,B,C,D);
 
-
 %Check stability of the system
-Eig_A = eig(vpa((A)));
+Eig_A = eig(A);
 if sign(Eig_A) > 0
     warning("Eigenvalues of A matrix indicate instability")
 else
 end
+
+% Check Observability
+rank_=rank(obsv(plant)); 
+%%%% Controllability
+rank_W=rank(ctrb(plant)); 
     
