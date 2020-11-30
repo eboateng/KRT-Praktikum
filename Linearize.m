@@ -19,27 +19,36 @@ x_d = [alpha_d beta_d gamma_d alpha_dd beta_dd gamma_dd]';
 % Solve the equations
 run('helikopter')
 
-%Solve for numerical values for the equations
-theta_a = vpa(theta_a); 
-theta_b = vpa(theta_a);
-theta_c = vpa(theta_c);
-alpha_dd = vpa(alpha_dd);
-beta_dd = vpa(beta_dd);
-gamma_dd = vpa(gamma_dd);
-
-
-%Linearization and State space system
-A = jacobian(x_d, x);
-B = jacobian(x_d, [F_f, F_b]);
-%C = ;
-D = zeros(size(B))
-
-%plant = ss(A,B,C,D);
-
 %Assume Travel, pitch, elevation begin at 0
 alpha = 0;
 beta = 0;
 gamma = 0;
+
+%Solve for numerical values for the equations
+theta_a = vpa(subs(theta_a)); 
+theta_b = vpa(subs(theta_a));
+theta_c = vpa(subs(theta_c));
+alpha_dd = vpa(subs(alpha_dd));
+beta_dd = vpa(subs(beta_dd));
+gamma_dd = vpa(subs(gamma_dd));
+
+
+
+%Linearization and State space system
+A_mat = jacobian(x_d, x)
+B_mat = jacobian(x_d, [F_f, F_b]);
+C = [eye(3) zeros(3,3)];
+D = zeros(size(B_mat));
+
+[F_f, F_b] = model_voltage()
+
+%F_f = subs(F_fr)
+%F_b = subs(F_bk)
+A = vpa(subs(A_mat))
+B = vpa(subs(B_mat))
+
+plant = ss(A,B,C,D);
+
 
 %Check stability of the system
 Eig_A = eig(vpa((A)));
