@@ -37,8 +37,8 @@ gamma_dd = vpa(subs(gamma_dd));
 %Linearization and State space system
 A_mat = jacobian(x_d, x)
 B_mat = jacobian(x_d, [F_f, F_b])
-C = [eye(3) zeros(3,3)];
-D = zeros(size(B_mat));
+C = [eye(3); zeros(3,3)]';
+D = zeros(size(C));
 
 [F_f, F_b] = model_voltage()
 
