@@ -54,7 +54,8 @@ else
 end
 
 % Check Observability
-rank_=rank(obsv(plant)); 
-%%%% Controllability
+rank_M=rank(obsv(plant)); 
+
+% Controllability
 rank_W=rank(ctrb(plant)); 
     
