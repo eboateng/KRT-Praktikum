@@ -34,8 +34,8 @@ beta_dd = vpa(subs(beta_dd));
 gamma_dd = vpa(subs(gamma_dd));
 
 %Linearization and State space system
-A_mat = jacobian(x_d, x);
-B_mat = jacobian(x_d, [F_f, F_b]);
+A_mat = jacobian(x_d, x)
+B_mat = jacobian(x_d, [F_f, F_b])
 C = [eye(3); zeros(3,3)]';
 D = zeros(size(3,2));
 

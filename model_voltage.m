@@ -25,4 +25,16 @@ coeff_back = polyfit(U_v,Backmotor,2);
 %calculate the Force based on the corresponding voltage
 F_fr = coeff_front(1)*V_f^2 + coeff_front(2)*V_f + coeff_front(3);
 F_bk = coeff_back(1)*V_b^2 + coeff_back(2)*V_b + coeff_back(3);
+% 
+% Create figure for report
+% figure()
+% for V = -10:0.5:10
+%     F_fr = coeff_front(1)*V^2 + coeff_front(2)*V + coeff_front(3);
+%     F_bk = coeff_back(1)*V^2 + coeff_back(2)*V + coeff_back(3);
+%     plot(V,(F_fr/9.81),'+-r',V,(F_bk/9.81),'-bo')
+%     legend('Force front propeller','Force back propeller')
+%     xlabel('Voltage [V]')
+%     ylabel('Propeller forces [g] ')
+%     hold on
+%     end
 end
