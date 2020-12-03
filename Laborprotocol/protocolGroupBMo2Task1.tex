@@ -9,6 +9,7 @@
                                
 \usepackage{units}
 \usepackage{hyperref}
+\usepackage[section]{placeins}
 
 % for German
 % \usepackage{ngerman}           % neue Deutsche Rechtschreibung, Silbentrennung
@@ -135,28 +136,26 @@ F_f&F_b
 
 \section{Voltage Model}
 
-Data of the dependency between the voltage and the corresponding forces of the propeller were provided. Analysis of the data shows a quadratic curve relationship between the Forces and the applied voltage. Using curve fitting methods (\mathit{polyfit} Matlab command), the exact parameters of the curve are obtained to be able to model the force dependency for any given decimal voltage. 
+Data of the dependency between the voltage and the corresponding forces of the propeller were provided. Analysis of the data shows a quadratic curve relationship between the Forces and the applied voltage. Using curve fitting methods (\textit{polyfit} Matlab command), the exact parameters of the curve are obtained to be able to model the force dependency for any given decimal voltage. 
 The derived coefficients and the corresponding equation the force as a function of the voltage is:
 \begin{align}
- F_f  (V) = 6.156*V^2 +	-0.1342*V 	-0.13917 \\
- F_b (V) = 4.704*V^2 +	0.00510*V 	-0.278
- \end{align}
+	F_f (V) &= 6.156*V^2 +	-0.1342*V 	-0.13917\\
+	F_b (V) &= 4.704*V^2 +	0.00510*V 	-0.278
+\end{align}
  
  A plot of the forces over a voltage spectrum is illustrates in Figure 2.
  
-\begin{figure}
+\begin{figure}[htb]
 \begin{center}
-\includegraphics[width=\columnwidth]{Voltage_Forces.png}
+\includegraphics[width=\linewidth]{Voltage_Force}
 \caption{Plot of propeller forces over voltage}
-\label{Figure 2}
+\label{model_voltage}
 \end{center}
 \end{figure}
 
-%The protocols have to be typeset with \LaTeX. A good German introduction to \LaTeX can be found in \citep{hagenEinfuehrung}. An alternative in English is \citep{lshort}. A short guide concerning the mathematical part is given by \citep{mathGuide}.
-
 \section{Plant model}
 
-Using the equation of the simplified physical model of the helicopter discussed in \hyperref[Simulation model of the helicopter]{section 2}, the mathematical state space model of the plant is derived by linearization of $\dot{x}$ w. r. t. ${x} $ to derive the A matrix and $\dot{x}$  w. r. t.  $u$ to derive the B matrix.
+Using the equation of the simplified physical model of the helicopter discussed in \textit{Simulation model of the helicopter}\{section 2\}, the mathematical state space model of the plant is derived by linearization of $\dot{x}$ w.r.t. ${x} $ to derive the A matrix and $\dot{x}$  w.r.t.  $u$ to derive the B matrix.
 
 The resulting computation in Matlab yields:
 
@@ -165,18 +164,18 @@ $A = \begin{bmatrix}
 0 & 0 & 0 & 1 & 0 & 0\\
 0 & 0 & 0 & 0 & 1 & 0\\
 0 & 0 & 0 & 0 & 0 & 1\\
-0 & \frac{(\sin(\beta)\sin(\gamma)L_2(F_b + F_f)}{mL_1^2 + ML_2^2} & -\frac{\cos(\beta)\cos(\gamma)L2(F_b + (F_f)}{mL_1^2 + M*L_2^2)} & 0 & 0 & 0\\
-0 & -\sin(\beta)gL_2M - L_1m & -\frac{\sin(\gamma)L_2(F_b + F_f)}{mL_1^2 + ML_2^2} & 0 & 0 & 0\\
+0 & -\frac{(\sin(\beta)\sin(\gamma)L_2(F_b + F_f)}{mL_1^2 + ML_2^2}& -\frac{\cos(\beta)\cos(\gamma)L2(F_b + (F_f)}{mL_1^2 + ML_2^2)} & 0 & 0 & 0\\
+0 &-\sin(\beta)gL_2M - L_1m & -\frac{\sin(\gamma)L_2(F_b + F_f)}{mL_1^2 + ML_2^2} & 0 & 0 & 0\\
 0 & 0 & 0 & 0 & 0 & 0
 \end{bmatrix}$
 
 $B = \begin{bmatrix}
-0 & 0\\
-0 & 0\\
-0 & 0\\
--\frac{\cos(\beta)\sin(\gamma)L_2}{mL_1^2 + ML_2^2} & \frac{\cos(\beta)\sin(\gamma)L2}{mL_1^2 + ML_2^2}\\
-\frac{\cos(\gamma)L_2}{mL_1^2 + ML_2^2} & \frac{\cos(\gamma)L_2}{mL_1^2 + ML_2^2}\\
-\frac{12}{mL_3} & -\frac{12}{mL_3}\\
+ 0 & 0\\
+ 0 & 0\\
+ 0 & 0\\
+ -\frac{\cos(\beta)\sin(\gamma)L_2}{mL_1^2 + ML_2^2} & \frac{\cos(\beta)\sin(\gamma)L2}{mL_1^2 + ML_2^2}\\
+ \frac{\cos(\gamma)L_2}{mL_1^2 + ML_2^2} & \frac{\cos(\gamma)L_2}{mL_1^2 + ML_2^2}\\
+ \frac{12}{mL_3} & -\frac{12}{mL_3}\\
 \end{bmatrix}$
  
  
@@ -215,19 +214,15 @@ Since the physical model of the helicopter has been simplified, our validation o
                                  % Elsevier at the time of printing.
                                  
 
-\begin{thebibliography}{3}
-
-
+\begin{thebibliography}{0}
 \bibitem[Quanser Inc.(2010)]{hagenEinfuehrung}
 Quanser Inc. (2011).
 \newblock 3-DOF Helicopter: User Manual'.
-\newblock
 
-
-\bibitem[Control of a 3-DOF Helicopter]{Handbook}
-Control of a 3-DOF Helicopter.
+\bibitem[Control of Helicopter(2020)]{Handbook}
+Control of a 3-DOF Helicopter(2020).
 \newblock Handbook for Laboratory Course "Concepts of Automatic Control".
-\newblock Corona Edition, Winter term 2020/21.
+\newblock Corona Edition.
 \end{thebibliography}
 
 %\appendix
