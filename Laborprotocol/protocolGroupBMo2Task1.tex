@@ -137,17 +137,18 @@ F_f&F_b
 
 Data of the dependency between the voltage and the corresponding forces of the propeller were provided. Analysis of the data shows a quadratic curve relationship between the Forces and the applied voltage. Using curve fitting methods (\mathit{polyfit} Matlab command), the exact parameters of the curve are obtained to be able to model the force dependency for any given decimal voltage. 
 The derived coefficients and the corresponding equation the force as a function of the voltage is:
-
+\begin{align}
  F_f  (V) = 6.156*V^2 +	-0.1342*V 	-0.13917 \\
- F_b (V) = 4.704*V^2 +	0.00510*V 	-0.278\\
+ F_b (V) = 4.704*V^2 +	0.00510*V 	-0.278
+ \end{align}
  
- A plot of the forces over a voltage spectrum is illustrates in Figure 1.
+ A plot of the forces over a voltage spectrum is illustrates in Figure 2.
  
-\begin{Figure 1}
+\begin{figure}
 \begin{center}
-\includegraphics[width=\linewidth]{Voltage_Forces.png}
+\includegraphics[width=\columnwidth]{Voltage_Forces.png}
 \caption{Plot of propeller forces over voltage}
-\label{Figure 1}
+\label{Figure 2}
 \end{center}
 \end{figure}
 
@@ -161,22 +162,22 @@ The resulting computation in Matlab yields:
 
 
 $A = \begin{bmatrix}
- 0 & 0 & 0 & 1 & 0 & 0\\
- 0 & 0 & 0 & 0 & 1 & 0\\
-  0 & 0 & 0 & 0 & 0 & 1\\
-0 & $\displaystyle \frac{(\sin(\beta)\sin(\gamma)L_2(F_b + F_f)}{mL_1^2 + ML_2^2}& -\frac{\cos(\beta)*\cos(\gamma)*L2*(F_b + (F_f)}{m*L1^2 + M*L2^2)} & 0 & 0 & 0\\
-[ 0 &-\sin(\beta)gL_2M - L_1m & $\displaystyle -\frac{\sin(\gamma)L_2(F_b + F_f)}{mL1^2 + ML_2^2} & 0 & 0 & 0\\
- 0 & 0 & 0 & 0 & 0 & 0
-\end{bmatrix}
+0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 0 & 1\\
+0 & \frac{(\sin(\beta)\sin(\gamma)L_2(F_b + F_f)}{mL_1^2 + ML_2^2} & -\frac{\cos(\beta)\cos(\gamma)L2(F_b + (F_f)}{mL_1^2 + M*L_2^2)} & 0 & 0 & 0\\
+0 & -\sin(\beta)gL_2M - L_1m & -\frac{\sin(\gamma)L_2(F_b + F_f)}{mL_1^2 + ML_2^2} & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0
+\end{bmatrix}$
 
 $B = \begin{bmatrix}
- 0 & 0\\
- 0 & 0\\
- 0 & 0\\
- $\displaystyle -\frac{\cos(\beta)\sin(\gamma)L_2}{mL_1^2 + ML_2^2} & -$\displaystyle \frac{\cos(\beta)\sin(\gamma)L2}{mL_1^2 + ML_2^2}\\
- \displaystyle \frac{\cos(\gamma)L_2}{mL_1^2 + ML_2^2} & \displaystyle \frac{\cos(\gamma)L_2}{mL_1^2 + ML_2^2}\\
-\displaystyle \frac{12}{mL_3} & $\displaystyle -\frac{12}{mL_3}\\
-\end{bmatrix}
+0 & 0\\
+0 & 0\\
+0 & 0\\
+-\frac{\cos(\beta)\sin(\gamma)L_2}{mL_1^2 + ML_2^2} & \frac{\cos(\beta)\sin(\gamma)L2}{mL_1^2 + ML_2^2}\\
+\frac{\cos(\gamma)L_2}{mL_1^2 + ML_2^2} & \frac{\cos(\gamma)L_2}{mL_1^2 + ML_2^2}\\
+\frac{12}{mL_3} & -\frac{12}{mL_3}\\
+\end{bmatrix}$
  
  
 
@@ -216,38 +217,12 @@ Since the physical model of the helicopter has been simplified, our validation o
 
 \begin{thebibliography}{3}
 
-\bibitem[Jürgens and Feuerstack(2011)]{hagenEinfuehrung}
-Jürgens,~M. and Feuerstack,~T. (2011).
-\newblock \LaTeX - eine Einführung und ein bißchen mehr\dots .
-\newblock Fernuniversität in Hagen, A/026/0911.
-\newblock Available online from
-\verb+http://www.fernuni-hagen.de/imperia/md+
-\verb+/content/zmi_2010/a026_latex_einf.pdf+.
 
-%\bibitem[Quanser Inc.(2010)]{hagenEinfuehrung}
-%Quanser Inc. (2011).
-%\newblock 3-DOF Helicopter: User Manual'.
-%\newblock
+\bibitem[Quanser Inc.(2010)]{hagenEinfuehrung}
+Quanser Inc. (2011).
+\newblock 3-DOF Helicopter: User Manual'.
+\newblock
 
-\bibitem[Oetiker et~al.(2011)]{lshort}
-Oetiker, T., Partl, H., Hyne, I., and Schlegl, E. (2011).
-\newblock The not so Short Introduction to \LaTeXe.
-\newblock Version 5.01, April 06, 2011.
-\newblock Available online from
-\verb+http://tobi.oetiker.ch/lshort/lshort.pdf+.
-
-\bibitem[Downes(2002)]{mathGuide}
-Downes, M. (2002).
-\newblock Short Math Guide for \LaTeX.
-\newblock American Mathematical Society.
-\newblock Available online from
-\verb+ftp://ftp.ams.org/pub/tex/doc/amsmath/+
-\verb+short-math-guide.pdf+.
-
-\bibitem[IEEE Control Systems Magazine(2004)]{WritingGuidelines}
-IEEE Control Systems Magazine (2004).
-\newblock Writing Guidelines for IEEE Control Systems Magazine.
-\newblock \emph{IEEE Control Systems Magazine}, 24(1), 89--90.
 
 \bibitem[Control of a 3-DOF Helicopter]{Handbook}
 Control of a 3-DOF Helicopter.
