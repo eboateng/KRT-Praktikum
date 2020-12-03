@@ -1,0 +1,211 @@
+\documentclass{ifacconf}
+
+\usepackage{natbib}            % you should have natbib.sty
+\usepackage[utf8]{inputenc}    % Eingabe von Umlauten im Editor, dieser sollte dann auch auf utf8 Encoding eingestellt sein
+\usepackage{graphicx}          % Include this line if your 
+                               % document contains figures,
+%\usepackage[dvips]{epsfig}    % or this line, depending on which
+                               % you prefer.
+                               
+\usepackage{units}
+
+% for German
+% \usepackage{ngerman}           % neue Deutsche Rechtschreibung, Silbentrennung
+% \usepackage[T1]{fontenc}       % Trennung mit Umlauten
+
+% to include tikz pictures of figure created with matlab2tikz, see also file ``plotFigureTest.m''
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}  % use newest version of pgfplots
+\usepackage{amsmath}  % useful for math
+
+% to include the legend into the caption. The commands are
+%\mlLineLegend{red}
+%\mlLineLegendDashed{red}
+%\mlLineLegendDotted{red}
+%\mlLineLegendDashDotted{red}
+%\mlPointLegend{red}
+\newlength{\mlLegendThickness}
+\setlength{\mlLegendThickness}{0.4mm}
+\newlength{\mlLegendHeight}
+\setlength{\mlLegendHeight}{0.6ex}
+\newcommand{\mlLineLegend}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{3mm}{\mlLegendThickness}\hspace*{-1mm}
+}}
+\newcommand{\mlLineLegendDashed}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{1.5mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{1.5mm}{\mlLegendThickness}\hspace*{-1mm}
+}}
+\newcommand{\mlLineLegendDotted}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{-1mm}
+}}
+\newcommand{\mlLineLegendDashDotted}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{1.5mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{1.5mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{-1mm}
+}}
+\newcommand{\mlPointLegend}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{-0.75mm}
+}}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{How to write a protocol for \\ the MSc laboratory course at the IST\thanksref{footnoteinfo}}
+
+\thanks[footnoteinfo]{Institute for Systems Theory and Automatic Control, University of Stuttgart, Germany. \textit{http://www.ist.uni-stuttgart.de}}
+
+% include all authors, underline corresponding author
+\author{\underline{M. Löhning},} 
+\author{C. Maier} 
+% \author{}
+
+\begin{abstract}                          % Abstract of not more than 250 words.
+This template gives instructions on how to write a protocol for the MSc laboratory course ``Praktikum Konzepte der Regelungstechnik'' at the IST. Use this document to write your protocol with \LaTeX.
+\end{abstract}
+
+\end{frontmatter}
+
+\section{Introduction}
+This document explains how a protocol of the master laboratory course at the IST should be written. Furthermore, the corresponding tex-file serves as a template for the protocols.
+
+\section{Purpose of protocol}
+
+The protocol has two main objectives: Making your approach or results repeatable and enabling your supervisor to evaluate your results.
+
+First, other people need to be able to reproduce the experiment and come to the same results. Therefore, the approach has to be documented such that the results can be repeated based on the given information. This is especially required in industry, whenever other people build up on your work. For this laboratory course, imagine that based on your protocol the next year students should come up with an improved solution. Furthermore, a good documentation also enables you to recapitulate your line of action after some time - e.g. when writing the final protocol mentioned in Section~\ref{sec:finalProtocol}. The master laboratory course with one detailed project is an excellent opportunity to learn documenting your work. Thus, we encourage you to document \emph{while} working and not only afterwards. This can be achieved by commenting your Matlab-files or making all required notes while being in the laboratory.
+
+Second, the reader of the protocol wants to assess your work. This should enable your supervisor not only to check your work but moreover to give specific feedback and helpful hints.
+
+\section{Style}
+To serve the above stated purpose of the protocols, we demand a high quality, i.e., well structured, a comprehensible line of thought, and well selected figures. Basic rules how to write in a comprehensible style can be found in the slides of the Proseminar course, which are in German. A selection of the appropriate slides can be found in Ilias. More detailed and English guidelines appeared in \cite{WritingGuidelines}.
+
+As we require a high quality of the protocols, we do not limit the number of pages. As a guideline, three pages is a reasonable length. But the protocol must contain all relevant information.
+
+\section{LaTeX}
+
+The protocols have to be typeset with \LaTeX. A good German introduction to \LaTeX can be found in \citep{hagenEinfuehrung}. An alternative in English is \citep{lshort}. A short guide concerning the mathematical part is given by \citep{mathGuide}.
+
+\section{Submission}
+
+Two files have to be submitted to the Praktikumskoordinator until 0:00 the day of the laboratory by uploading them into Ilias:
+\begin{itemize}
+\item A pdf-file of the protocol and
+\item a zip-file containing all the relevant Matlab-files.
+\end{itemize}
+Every student has to be \emph{responsible} for the protocol and the zip-files \emph{once} during the course.
+
+The protocol for every laboratory day has to contain
+\begin{itemize}
+\item a result protocol of the last laboratory, if applicable, 
+\item a protocol of the preparation and 
+\item a working plan for the next laboratory.
+\end{itemize}
+A template for the working plan can be found in Table~\ref{table:working plan}.
+\begin{table*}
+\caption{A Working Plan Template.}
+\label{table:working plan}
+\centering
+\begin{tabular}{|c|c|p{4.5cm}|p{4.5cm}|p{4.5cm}|}
+\hline
+\bfseries Time & \bfseries Duration & \bfseries Goal & \bfseries Task & \bfseries Preparation\\ \hline \hline
+14:00 & 30 min. & Test File to actuate motor & Create Quarc Simulink File & Read Quarc documentation \\ \hline
+ &  &  &  &  \\ \hline
+ &  &  &  &  \\ \hline
+ &  &  &  &  \\ \hline
+ &  &  &  &  \\ \hline
+\end{tabular}
+\end{table*}
+Of the last laboratory day, a result protocol has to be written which is due one week after the laboratory.
+
+To make your approach or results repeatable, comment all your Matlab-scripts and Simulink-files appropriately - preferably while working with them. Decide, which files and maybe also measurement data is necessary to repeat your results. Then, put all necessary files into one zip-file and upload it into Ilias. In the protocol you should reference the files where the information is only needed for repeatability. Furthermore, you should refer to the files while explaining your procedure. Thus, you don't have to include all information into the protocol.
+
+You can write either in German or English. If you write in German, it is a good idea to include the packages ngerman, inputenc, and fontenc in the preamble of your tex-file.
+
+\section{Structure}
+
+In the title include your group description and the task the protocol is about. The group description follows the syntax \mbox{$IDDN$-$T$} with $I=\{A,B\}$ being the cycle number, $DD=\{Mo,We,Th\}$ the day, $N=\{1-4\}$ the group number and $T=\{1-5\}$ the task number. For example \mbox{IMo1-1}. Include all group members as authors. Underline the corresponding author. In the abstract, you should summarize the result within up to three sentences.
+
+% if an error occurs here: go to the options of your editor and change the commands in the configuration panel corresponding to PDFLaTeX: add "-shell-escape" befor "%.tex"
+%(e.g. Options --> Configure Texmaker --> Commands --> PDFLaTex --> "pdflatex -synctex=1 -interaction=nonstopmode -shell-escape %.tex" )
+
+The structure on the section level has to be decided depending on the tasks. For the main sections, the structure can be similar to the problem-solving process:
+\begin{itemize}
+\item \emph{Work task} explaining the task and the goal.
+\item \emph{Solution approach} describing the chosen solution to allow the reader to repeat and assess the solution.
+\item \emph{Result} containing the observations and justified conclusions.
+\item \emph{Critical comments} evaluating the approach including a comparison with the working plan. Furthermore the pros and cons should be discussed.
+\end{itemize}
+
+\section{Figures and Graphics}
+All figures should be created as done in the Matlab-script ``plotFigureTest.m'' which can be found in Ilias. By following the procedure, the axis labels and ticks are in an appropriate size, the same \LaTeX-font is used, and the line thickness is adjusted resulting in a formally excellent figure. If you have plots in Simulink, export the data and create a Matlab figure. To label the axis, use words and not symbols. Write units in parentheses. E.g., write ``Control input $u$ (V)''. An easy and nice-looking way for the legend is to include it into the caption of the figure. See the tex-code for more details.
+
+\begin{figure} % use \begin{figure*} for two-column figure
+\begin{center} 
+% the variable for the width of the figure which you created with matlab2tikz has to be defined and set
+\newlength{\figurewidth} % ... defined
+\setlength{\figurewidth}{0.8\columnwidth} % ...set 
+% for details see file ``plotFigureTest.m''
+\input{FigureTest.tikz} % inclusion of tikz-code
+%\includegraphics[width=\columnwidth]{fig1} % inclusion of pdf
+\caption{Exemplary Matlab figure. The exemplary signal is plotted in (\mlLineLegend{black}).}
+\label{fig1}
+
+\end{center}
+\end{figure}
+
+Graphics for the protocol can be made for example with the Open Source vector graphics editor Inkscape. Details can be found on \verb+http://inkscape.org/+.
+
+\section{Final protocol}
+\label{sec:finalProtocol}
+At the end of the course a protocol over the whole laboratory has to be written. This final protocol may have up to 8 pages. The final protocol may be based on your other protocols and you can reuse parts of the other protocols. But the final protocol has to be self-contained and needs to have a comprehensible line of thought. 
+
+The purpose of the final protocol is that the reader gets an idea of your whole solution. Therefore, it should contain the results of your work. To understand the results, you should also include your approaches on a more abstract level. For you, the final protocol is a chance to reflect the laboratory as a whole.
+
+
+%\bibliographystyle{alpha}        % Include this if you use bibtex 
+%\bibliography{autosam}           % and a bib file to produce the 
+%\bibliography{autosam}
+                                 % bibliography (preferred). The
+                                 % correct style is generated by
+                                 % Elsevier at the time of printing.
+
+\begin{thebibliography}{3}
+
+\bibitem[Jürgens and Feuerstack(2011)]{hagenEinfuehrung}
+Jürgens,~M. and Feuerstack,~T. (2011).
+\newblock \LaTeX - eine Einführung und ein bißchen mehr\dots .
+\newblock Fernuniversität in Hagen, A/026/0911.
+\newblock Available online from
+\verb+http://www.fernuni-hagen.de/imperia/md+
+\verb+/content/zmi_2010/a026_latex_einf.pdf+.
+
+\bibitem[Oetiker et~al.(2011)]{lshort}
+Oetiker, T., Partl, H., Hyne, I., and Schlegl, E. (2011).
+\newblock The not so Short Introduction to \LaTeXe.
+\newblock Version 5.01, April 06, 2011.
+\newblock Available online from
+\verb+http://tobi.oetiker.ch/lshort/lshort.pdf+.
+
+\bibitem[Downes(2002)]{mathGuide}
+Downes, M. (2002).
+\newblock Short Math Guide for \LaTeX.
+\newblock American Mathematical Society.
+\newblock Available online from
+\verb+ftp://ftp.ams.org/pub/tex/doc/amsmath/+
+\verb+short-math-guide.pdf+.
+
+\bibitem[IEEE Control Systems Magazine(2004)]{WritingGuidelines}
+IEEE Control Systems Magazine (2004).
+\newblock Writing Guidelines for IEEE Control Systems Magazine.
+\newblock \emph{IEEE Control Systems Magazine}, 24(1), 89--90.
+
+\end{thebibliography}
+
+%\appendix
+\end{document}
