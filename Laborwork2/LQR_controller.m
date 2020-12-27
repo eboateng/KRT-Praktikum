@@ -8,8 +8,8 @@ W=zeros(n,n); H=zeros(z,n);
 %A_aug=[A F; -C T]; 
 %B_aug=[B;-D];                   % augment plant with integrators
 Q_I=eye(9);             % weight on integrated error
-Q=eye(n);
-R=eye(z);                       % input weight
+Q=diag(n);
+R=diag(z);                       % input weight
 [Kr,P,EW]=lqr(A,B,Q,R);
 [Kr_I,P_I,EW_I] = lqi(plant,Q_I,R,0);
 
