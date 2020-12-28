@@ -1,16 +1,18 @@
 run('Linearize.m')
 
-p=size(3,1);                    % no. of outputs (y)
-[n,z]=size(B);                  % no. of states nd inputs (u)(6,2)
-F=zeros(n,z); T=zeros(z,z); 
-W=zeros(n,n); H=zeros(z,n);
-% 1) Design a state feedback controller
-%A_aug=[A F; -C T]; 
-%B_aug=[B;-D];                   % augment plant with integrators
-Q_I=eye(9);             % weight on integrated error
-Q=eye(n);
-R=eye(z);                       % input weight
-[Kr,P,EW]=lqr(A,B,Q,R);
-[Kr_I,P_I,EW_I] = lqi(plant,Q_I,R,0);
+% Parameter of the LQI_Controller
 
-u = -Kr*x;
+Q_LQI=eye(8);             % weight on integrated error
+%Q=eye(n);
+R=eye(2);                       % input weight
+C_LQI = [eye(2), zeros(2,4)];
+%[K_LQR,P,EW]=lqr(A,B,Q,R);
+[K_LQI,P_I,EW_I] = lqi(ss(A,B,C_LQI,[]),Q_LQI,R);
+K_LQR = K_LQI(1:2,1:6);
+Vorfilter = -inv(C_LQI*inv(A-B*K_LQR)*B);
+EW = eig(A-B*K_LQR);
+
+% Oberserver
+observer_poles=[-10 -10 -20 -20 -30 -30]; 
+L=place(A',C', observer_poles); 
+L=L'; 
