@@ -6,7 +6,7 @@ run('Linearize.m')
 Q=eye(8);             
 R=eye(2);                       
 C_LQI = [eye(2), zeros(2,4)];
-[K_LQI,P_I,EW_I] = lqi(ss(A,B,C_LQI,[]),Q,R);
+K_LQI = lqi(ss(A,B,C_LQI,[]),Q,R);
 K_LQR = K_LQI(1:2,1:6);
 
 % Vorfilter
