@@ -7,8 +7,8 @@ run('helikopter')
 syms alpha beta gamma alpha_d beta_d gamma_d  F_f F_b
 
 
-alpha_dd = (1/theta_a) * (-cos(beta))*L2*sin(gamma)*(F_b+F_f);
-beta_dd = (1/theta_b)  * cos(gamma)*L2*(F_b+F_f)-cos(beta)*(m*L1*g-M*L2*g);
+alpha_dd = (1/(theta_a_2 + cos(beta)*theta_a_1)) * (-cos(beta))*L2*sin(gamma)*(F_b+F_f);
+beta_dd = (1/theta_b)  * (M_beta*cos(beta)+cos(gamma)*L2*(F_f+F_b));
 gamma_dd = (1/theta_c ) * 0.5*L3*(F_f-F_b);
 
 
