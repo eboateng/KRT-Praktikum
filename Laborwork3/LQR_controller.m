@@ -1,12 +1,15 @@
+
 run('Linearize.m')
 
-% Parameter of the LQI_Controller
+% Weightmatrix
+Q=diag([20 1 1 1 1 1 1 1]); %alpha beta gamma alpha_d beta_d gamma_d 
+R=eye(2); 
 
-
-Q=eye(8);             
-R=eye(2);                       
+% Neu C_Matrix
 C_LQI = [eye(2), zeros(2,4)];
-K_LQI = lqi(ss(A,B,C_LQI,[]),Q,R);
+
+% LQI_Regler
+K_LQI= lqi(ss(A,B,C_LQI,[]),Q,R);
 K_LQR = K_LQI(1:2,1:6);
 
 % Vorfilter
@@ -19,7 +22,7 @@ B_LQI=[B;zeros(2,2)];
 % Eigenwerte des geschlossenen Kreises
 EW = eig(A_LQI-B_LQI*K_LQI);
 
-% Oberserver
-observer_poles=[-20 -21 -22 -23 -24 -25]; 
+% Luenberg Beobachter
+observer_poles=[-23 -23.1 -23.2 -23.3 -23.4 -23.5]; 
 L=place(A',C', observer_poles); 
 L=L'; 

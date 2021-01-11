@@ -6,7 +6,7 @@ run('helikopter')
 
 syms alpha beta gamma alpha_d beta_d gamma_d  F_f F_b
 
-
+%Drallsatz
 alpha_dd = (1/(theta_a_2 + cos(beta)*theta_a_1)) * (-cos(beta))*L2*sin(gamma)*(F_b+F_f);
 beta_dd = (1/theta_b)  * (M_beta*cos(beta)+cos(gamma)*L2*(F_f+F_b));
 gamma_dd = (1/theta_c ) * 0.5*L3*(F_f-F_b);
@@ -15,7 +15,8 @@ gamma_dd = (1/theta_c ) * 0.5*L3*(F_f-F_b);
 x = [alpha; beta; gamma; alpha_d; beta_d; gamma_d];
 x_d = [alpha_d; beta_d; gamma_d; alpha_dd; beta_dd; gamma_dd];
 
-
+%initial conditions x_0
+initial_conditions=[0,-27*pi/180,0,0,0,0]';
 
 %stationary point x_s
 alpha_s = 0;
@@ -23,6 +24,7 @@ beta_s = -7.5*pi/180; % initial elevation is offset
 gamma_s = 0;
 x_s = [alpha_s beta_s gamma_s 0 0 0];
 dx_s = subs(x_d,[alpha,beta,gamma,alpha_d,beta_d,gamma_d],x_s);
+
 %stationary point u_s
 u_s = zeros(2,1);
 u_s(1)=solve(dx_s).F_f;
@@ -58,6 +60,6 @@ end
 
 % Check Observability
 rank_=rank(obsv(plant)); 
-%%%% Controllability
+% Check Controllability
 rank_W=rank(ctrb(plant)); 
 
