@@ -2,7 +2,7 @@
 run('Linearize.m')
 
 % Weightmatrix
-Q=diag([1 1 1 1 1 1 1 1]); %alpha beta gamma alpha_d beta_d gamma_d 
+Q=diag([500 20 20 50 1 1 10 20]); %alpha beta gamma alpha_d beta_d gamma_d 
 R=diag([1 1]); 
 
 % Neu C_Matrix
@@ -26,3 +26,5 @@ EW = eig(A_LQI-B_LQI*K_LQI);
 observer_poles=[-23 -23.1 -23.2 -23.3 -23.4 -23.5]; 
 L=place(A',C', observer_poles); 
 L=L'; 
+
+sim('LQI_Regler_Blackbox')
