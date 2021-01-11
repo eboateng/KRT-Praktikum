@@ -2,8 +2,8 @@
 run('Linearize.m')
 
 % Weightmatrix
-Q=diag([20 1 1 1 1 1 1 1]); %alpha beta gamma alpha_d beta_d gamma_d 
-R=eye(2); 
+Q=diag([1 1 1 1 1 1 1 1]); %alpha beta gamma alpha_d beta_d gamma_d 
+R=diag([1 1]); 
 
 % Neu C_Matrix
 C_LQI = [eye(2), zeros(2,4)];
