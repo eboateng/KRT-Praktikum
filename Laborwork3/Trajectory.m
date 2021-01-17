@@ -22,8 +22,8 @@ xlabel('X')
 ylabel('Y')
 hold off
 
-alpha_path = path(1,:);
-beta_path = path(2,:);
+alpha_path = pi/180.*path(1,:);
+beta_path = pi/180.*path(2,:);
 
 sig_alpha_ts = timeseries(alpha_path)
 sig_beta_ts = timeseries(beta_path)
