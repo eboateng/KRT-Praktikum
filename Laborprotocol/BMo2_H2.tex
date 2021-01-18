@@ -1,0 +1,401 @@
+\documentclass{ifacconf}
+
+\usepackage{natbib}            % you should have natbib.sty
+\usepackage[utf8]{inputenc}    % Eingabe von Umlauten im Editor, dieser sollte dann auch auf utf8 Encoding eingestellt sein
+\usepackage{graphicx}          % Include this line if your 
+                               % document contains figures,
+%\usepackage[dvips]{epsfig}    % or this line, depending on which
+                               % you prefer.
+                               
+\usepackage{units}
+
+% for German
+% \usepackage{ngerman}           % neue Deutsche Rechtschreibung, Silbentrennung
+% \usepackage[T1]{fontenc}       % Trennung mit Umlauten
+
+% to include tikz pictures of figure created with matlab2tikz, see also file ``plotFigureTest.m''
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}  % use newest version of pgfplots
+\usepackage{amsmath}  % useful for math
+
+% to include the legend into the caption. The commands are
+%\mlLineLegend{red}
+%\mlLineLegendDashed{red}
+%\mlLineLegendDotted{red}
+%\mlLineLegendDashDotted{red}
+%\mlPointLegend{red}
+\newlength{\mlLegendThickness}
+\setlength{\mlLegendThickness}{0.4mm}
+\newlength{\mlLegendHeight}
+\setlength{\mlLegendHeight}{0.6ex}
+\newcommand{\mlLineLegend}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{3mm}{\mlLegendThickness}\hspace*{-1mm}
+}}
+\newcommand{\mlLineLegendDashed}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{1.5mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{1.5mm}{\mlLegendThickness}\hspace*{-1mm}
+}}
+\newcommand{\mlLineLegendDotted}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{-1mm}
+}}
+\newcommand{\mlLineLegendDashDotted}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{1.5mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{1.5mm}{\mlLegendThickness}\hspace*{0mm}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{-1mm}
+}}
+\newcommand{\mlPointLegend}[1]{\mbox{\color{#1}
+\protect\rule[\mlLegendHeight]{0.4mm}{\mlLegendThickness}\hspace*{-0.75mm}
+}}
+
+\begin{document}
+
+\begin{frontmatter}
+	
+\title{Gruppe B-Mo2: \\ Protokoll für L2 und H2}
+% include all authors, underline corresponding author
+\author{\underline{Yuchan Bian},} 
+\author{Jiaqi Qin,}
+\author{E. Boateng} 
+
+
+\begin{abstract}                          % Abstract of not more than 250 words.
+Zuerst wird das Reglertyp nach ausgewählten Anforderungen festgelegt. Danach wird der Regler entworfen und die Entscheidung wird durch Simulationsmodell gerechtfertigt.
+\end{abstract}
+
+\end{frontmatter}
+
+\section{Systemanalyse}
+Der Zustandsvektor x, die Schubkraft der Rotoren als Eingangsvektor u und der Ausgang y lauten wie folgend:
+\begin{equation}
+	x=\left[\begin{array}{c}
+		\alpha,\beta,\gamma,\dot{\alpha},\dot{\beta},\dot{\gamma}\
+	\end{array}\right]^T
+\end{equation}
+\begin{equation}
+	u=\left[\begin{array}{c}
+		F_{f}\\F_{b}
+	\end{array}\right]
+\end{equation}
+\begin{equation}
+	y=\left[\begin{array}{c}
+		\alpha\\\beta\\\gamma
+	\end{array}\right]
+\end{equation}
+Um das System leichter zu analysieren und die Basis fuer eine spaetere Regelerauslegung zu generieren, wird das System um eine Ruhelage linearisiert. Als Linearisierungspunkt wird
+\begin{equation}
+	\bar{x} =\left[\begin{array}{c}
+		0,-7.5^{\circ},0,0,0,0
+	\end{array}\right] ^{T}
+\end{equation}
+gewaehlt.
+Auf Basis des Arbeitspunktes wird die Schubkraft als Eingang fuer die Ruhelage bestimmt. 
+\begin{equation}
+	\bar{u}=\left[\begin{array}{c}
+		0.5742\\0.5742
+	\end{array}\right]
+\end{equation}
+
+
+\section{Linearisierte System}
+\subsection{Zustandsdarstellung des Linearisierten Systems}
+Fuer die Systemmatrix A ergibt sich durch Ableiten nach dem Zustandsvektor x und einsetzen des Linearisierungspunktes:
+\begin{equation}
+	A=\left[\begin{array}{llllll}
+		0 & 0 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 1 \\
+		0 & 0 & -0.6783& 0 & 0 & 0 \\
+		0 & -0.0883& 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0
+	\end{array}\right]
+\end{equation}
+Die Eingangsmatrix B ergibt sich durch Jacobi-Matrix abgeleitet nach den Eingangsgrößen und einsetzen des Linearisierungspunktes zu:
+\begin{equation}
+	B=\left[\begin{array}{cc}
+		0 & 0 \\
+		0 & 0 \\
+		0 & 0 \\
+		0 & 0 \\
+		0.5839 & 0.5839\\
+		5.5389& -5.5389\\
+	\end{array}\right]
+\end{equation}
+Die Ausgangsmatrix C ergibt sich zu
+\begin{equation}
+	\begin{array}{l}
+		C=\left[\begin{array}{llllll}
+			1 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 & 0
+		\end{array}\right] 
+	\end{array}
+\end{equation}
+
+Die Durchgriffsmatrix D ergibt sich zu Null und ist mit folgender Dimension durch 
+\begin{equation}
+	\begin{array}{l}
+		D=\left[\begin{array}{ll}
+			0 & 0 \\
+			0 & 0 \\
+			0 & 0
+		\end{array}\right]
+	\end{array}
+\end{equation}
+gegeben.\\
+
+Bei weiteren Untersuchungen eines Beobachters und der Regelerauslegung ist darauf zu achten, dass das linearisierte Modell nun mit den Abweichungen $\Delta{x}$, $\Delta{u}$, $\Delta{y}$ der Größen arbeitet. 
+ \begin{equation}{}
+ 	\Delta{x}=x-\bar{x},
+ 	\Delta{u}=u-\bar{u},
+ 	\Delta{y}=y-\bar{y}
+ \end{equation}
+Das linearisierte System ist vollständig gegeben durch:
+\begin{equation}{}
+	 \Delta{\dot{x}}=A \Delta{x}+B \Delta{u}  \qquad \Delta{y}=C\Delta{x}+ D \Delta{u} 
+\end{equation}
+mit der Anfangsbedingung 
+ \begin{equation}{}
+	\Delta{x}(0)=x(0)-\bar{x}
+\end{equation}
+\subsection{Steuerbarkeit und Beobachtbarkeit}
+Die Steuerbarkeit und Beobachtbarkeit von Systemen sind in Matlab gerechnet und sie haben beiden Vollrank. Das lineare System ist steuerbar und beobachtbar.
+
+\section{Reglerntwurf}
+\subsection{Anforderungen  an den Regler}
+Zur Erfüllung der Aufgabenstellung werden an den Regler folgende Anforderung gestellt:
+\begin{itemize}
+	\item Der geschlossene Kreis soll stabil sein.
+	\item  Die bleibende Regelabweichung von $\alpha$ und $\beta$  soll so gering sein, dass der Helikopter entlang einer vorgegebenen Trajektorie fliegen kann.
+	\item Der Helikopter kann die vorgegebene Position schnell erreichen.
+\end{itemize}
+
+Als Regler haben wir uns für einen LQI-Regler ausgewählt. Im Folgenden werden der Reglerentwurf und das Verhalten der Simulation in Matlab dargestellt. Der LQI-Regler kann die aufgestellten Anforderungen erfüllen.
+
+\subsection{LQI-Regelstruktur}
+Die Regelkreisstruktur stellt sich wie folgend dar(Abbildung \ref{fig:Regelstruktur}):\\
+\begin{figure} [h]
+	\begin{center} 
+		\includegraphics[scale=0.14]{Regelstruktur} 
+		\caption{Regelstruktur}\label{fig:Regelstruktur}
+	\end{center}
+\end{figure}\\
+Der LQI Regler wird mittels Matlab Befehl "lqi" angewendet. Für eine Strecke mit den Zustandsraumgleichungen:
+ \begin{equation}{}
+\begin{split}
+	\left[\begin{array}{l}
+		\Delta \dot{x} \\
+		\Delta \dot{x}_{i}
+	\end{array}
+\right] =&\left[\begin{array}{c}
+		A \Delta x+B \Delta u \\
+		\Delta r-\Delta y
+	\end{array}\right] \\
+=&\underbrace{\left[\begin{array}{cc}
+			A & 0 \\
+			-C & 0
+		\end{array}\right]}_{A_{-} LQI}\left[\begin{array}{c}
+		\Delta x \\
+		\Delta x_{i}
+	\end{array}\right]+\underbrace{\left[\begin{array}{c}
+			B \\
+			0
+		\end{array}\right]}_{B_{-} LQI} \Delta u+\left[\begin{array}{c}
+		0 \\
+		I
+	\end{array}\right] \Delta r
+\end{split}
+\end{equation}
+$\Delta{x} \in R^{6*1}$ und $\Delta{x_{i}}$ ist der Integratorausgang für Fehler e $\in R^{2*1}$. \\
+\begin{equation}
+	y_{neu}=\left[\begin{array}{c}
+		\alpha\\\beta
+	\end{array}\right]
+\end{equation}
+Die neue Matrix $A_{-} LQI$ in jetztigen System lautet:
+\begin{equation}
+	A=\left[\begin{array}{llllllll}
+		0 & 0 & 0 & 1 & 0 & 0 & 0 &0 \\
+		0 & 0 & 0 & 0 & 1 & 0 & 0 &0 \\
+			0 & 0 & 0 & 0 & 0 & 1 & 0 &0 \\
+		0 & 0 & -0.6783 & 0 & 0 & 0 & 0 &0 \\
+		0 & -0.0883 & 0 & 0 & 0 & 0 & 0 &0 \\
+			0 & 0 & 0 & 0& 0 & 0 & 0 &0 \\
+				-1 & 0 & 0 & 0 & 0 & 0 & 0 &0 \\
+					0 & -1 & 0 & 0& 0 & 0 & 0 &0 
+	\end{array}\right]
+\end{equation}
+Die Eingangsmatrix $B_{-} LQI$:
+\begin{equation}
+	B=\left[\begin{array}{cc}
+		0 & 0 \\
+		0 & 0 \\
+		0 & 0 \\
+		0 & 0 \\
+		0.5839& 0.5839\\
+		5.5389& -5.5389\\
+		0 & 0 \\
+		0 & 0 
+	\end{array}\right]
+\end{equation}
+
+Die neue Ausgangsmatrix C ergibt sich zu
+\begin{equation}
+	\begin{array}{l}
+		C_{neu}=\left[\begin{array}{llllll}
+			1 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 & 0 \\
+		\end{array}\right] 
+	\end{array}
+\end{equation}
+
+Die Matrix D lautet gleich wie früher:
+\begin{equation}
+	\begin{array}{l}
+		D=\left[\begin{array}{ll}
+			0 & 0 \\
+			0 & 0 
+		\end{array}\right]
+	\end{array}
+\end{equation}
+
+
+Denn wir brauchen nur die $\alpha$ und $\beta$ für Trajektorie, das bedeutet, 
+\begin{equation}
+	r=\left[\begin{array}{c}
+		\alpha_{r}\\\beta_{r}
+	\end{array}\right]
+\end{equation}
+
+Die Zustandsrückkopplungssteuerung hat die Form
+\begin{equation}{}
+	\Delta{u} = -K [\Delta{x}; \Delta {x_{i}}]
+\end{equation}
+%\begin{equation}
+	%x=\left[\begin{array}{c}
+	%	\alpha\\\beta\\\gamma\\\dot{\alpha}\\\dot{\beta}\\\dot{\gamma}\ 
+	%\end{array}\right] 	
+%\end{equation}
+
+\begin{equation}{}
+K=[\begin{smallmatrix}
+	-2.4430& 1.6879& 2.2827& -3.8667 & 1.8413& 0.9551& 0.7071& -0.7071\\
+2.4430& 1.6879& -2.2827 & 3.8667&  1.8413&  -0.9551& -0.7071& -0.7071
+\end{smallmatrix}]
+\end{equation}
+Und $K \in R^{2*8}$.\\
+Die Eigenwerte des geschlossenen Regelkreises ergeben sich zu:
+\begin{equation}
+	EW=\left[\begin{array}{c}
+		-7.7685\\
+		-0.4861+0.7260i\\
+		-0.4861-0.7260i\\
+		-0.9196+0.2243i\\
+		-0.9196-0.2243i\\
+		-0.6375+0.7327i\\
+		-0.6375-0.7327i\\
+	   -0.8754
+	\end{array}\right]
+\end{equation}
+Die negativen Realteile der Eigenwerte zeigen alles asympotisch stabiles Verhalten des geschlossenen Regelkreises.
+
+Der LQI-Regler wird durch Matlab-Befehl ''lqi'' angewandet. Dieses Steuergesetz stellt sicher, dass die Ausgabe y die Referenztrajektorie r gut trackt. Bei MIMO-Systemen entspricht die Anzahl der Integratoren der Dimension der Ausgabe y. [K, S, e] = lqi (SYS, Q, R, N) berechnet die optimale Verstärkungsmatrix K unter Berücksichtigung eines Zustandsraummodells SYS für die Matrizen Q, R, N (In unseren System wählen wir N=0). u und y sind absolute Werte für das linearisiertes Modell. Aber $\Delta u$ und $\Delta y$ sollen für das nichtlinearisiertes Modell angewendet werden.
+
+\begin{equation}
+Q=\left[\begin{array}{llllllll}
+	1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+	0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+	0 & 0 & 1 & 0& 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+	0 & 0 & 0 & 0 & 0 & 0 & 0 & 1
+\end{array}\right]
+\end{equation}
+\begin{equation}
+	\begin{array}{l}
+		R=\left[\begin{array}{ll}
+			1 & 0 \\
+			0 & 1 
+		\end{array}\right]
+	\end{array}
+\end{equation}
+
+\subsection{Beobachterentwurf}
+Da die Winkelgeschwindigkeiten des Helikopters nicht messbar sind, ist ein Beobachter erforderlich, welcher diese fehlenden Zustaende schaetzt. Der Luenberger Beobachter wird angewendet, um die Zustände zu rekonstruieren. Die Pole des Beobachters wurden nach diese Befehl: $p= min (real(EW))*3 $ ausgewählt. Die Pole p in unseren System lautet:
+\begin{equation}
+	p =\left[\begin{array}{c}
+		-20,-21,-22,-23,-24,-25
+	\end{array}\right] ^{T}
+\end{equation}
+
+\section{Trajektorie}
+\subsection{Für set point Transition}
+Die geplante Trajektorie wurde erstellt, die der Helikopter anfanhren soll. Hier kann man zuerst eine einfache Referenztrajektorie für $\alpha$ Winkel und $\beta$ Winkel benutzen, um den Regler zu testen.
+
+\subsection{Für weitere Trajektorieentwurf}
+
+\section{Ergebnisse}
+Das System mit linearisierten Modell und dem Regler wurde in Matlab simulativ getestet. Folgende Abbildung stellt die Ergebnisse dar (Abbildung \ref{Abb:Ergebnisse in linearisierten Modell}):\\
+\begin{figure} [h]
+	\begin{center} 
+		\includegraphics[scale=0.4]{Ergebnisse in linearisierten Modell} 
+		\caption{Ergebnisse in linearisierten Modell}\label{Abb:Ergebnisse in linearisierten Modell}
+	\end{center}
+\end{figure}\\
+Die obere Teil von Abbildung ist das Ergebnis von Regler fuer $\alpha$ Winkel und die untere Teil ist fuer $\beta$ Winkel. Die zwei blaue Linien sind jeweils die Sollwerte von $\alpha$ Winkel und $\beta$ Winkel. Und die zwei gelbe Linien sind jeweils die Simulationsergebnisse von $\alpha$ Winkel und $\beta$ Winkel.
+
+Aus der Abbildung sieht man deutlich, dass das Verhalten des Reglers gut funktioniert. Aber am Anfang gibt es noch eine Sprung. Der Regler wird weiter entwickelt und dieses Problem soll geloest werden. Jetzt ist das linearisierte System mit dem Regelr stabil. Danach wird der Regler am nichtlinearisierten System weiter getestet werden.
+
+
+\section{Arbeitsplan für Labwork 3}
+\label{sec:labwork2}
+
+In der dritten Laborarbeit geht es hauptsächlich um Testen und Versbesserung des Kontrollers. Dafür wird das Simulationsmodell von dem Teilsystem ''Black Box Model'' in blackbox-heli.slx ersetzt. Ziel hierbei ist Benutzung unserers Kontroller in detailliertes Simulationsmodell. Anschließend wird einen weitere Testen mit Black Box Model. Danach sollen einige potenzielle Probleme berucksichtigt werden, wenn die letzte Kontrollaufgabe verfolgt wird. Basierend auf allen Testen, ist die Verbesserung unseres Kontrollers wichtig. Wenn benötigt, soll das originalen Systemmodell korrigiert und verbessert werden. Die genaue Arbeitsplan mit Zeitplan ist in der unteren Tabelle.
+
+\begin{table*}
+\caption{Arbeitsplan für Labwork 3}
+%\textcolor{red}{Tabelle mit Werten füllen + vervollständigen}
+%\label{table:parameters}
+\centering	
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\bfseries Zeit & \bfseries Dauer & \bfseries Ziel & \bfseries Aufgabe \\ \hline \hline
+		$14:00$	& $60min$ & Regler mit neuen Trajektorie funktioniert& Trajektorie fuer Helikopter erstellen und testen\\ \hline
+		$15:00$	& $90min$ & Regler in ''Black Box Modell'' funktioniert  &   Testen des Kontrollers im Simulationsmodell  \\ \hline
+		$16:30$	    & $60min$ & Potenzielle Probleme loesen&  Probleme beruecksichtigen und loesen  \\ \hline
+		$17:30$		& $30min$ & Verbessrung des Reglers &  Weitere Entwicklung des Reglers  	\\ \hline
+	\end{tabular}
+\end{table*}
+
+
+
+
+%\bibliographystyle{alpha}        % Include this if you use bibtex 
+%\bibliography{autosam}           % and a bib file to produce the 
+%\bibliography{autosam}
+                                 % bibliography (preferred). The
+                                 % correct style is generated by
+                                 % Elsevier at the time of printing.
+
+\begin{thebibliography}{1}
+	
+\bibitem{handbook}Handbook Control of a 3-DOF Helicopter
+\\ IST, University of Stuttgart, Germany
+\\ Corona Edition Winter term 2020/21
+	
+\bibitem{Regelkreisstrukturen}Regelkreisstrukturen
+\\ IST, University of Stuttgart, Germany	
+
+	
+	
+	
+\end{thebibliography}
+
+%\appendix
+\end{document}
