@@ -20,7 +20,7 @@ initial_conditions=[0,-27*pi/180,0,0,0,0]';
 
 %stationary point x_s
 alpha_s = 0;
-beta_s = -7.5*pi/180; % initial elevation is offset
+beta_s = -3.0*pi/180; 
 gamma_s = 0;
 x_s = [alpha_s beta_s gamma_s 0 0 0];
 dx_s = subs(x_d,[alpha,beta,gamma,alpha_d,beta_d,gamma_d],x_s);
