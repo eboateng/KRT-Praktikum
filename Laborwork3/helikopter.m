@@ -40,7 +40,7 @@ l_SecArm = (sqrt((228.5 + cos(16*pi/180)*135.5)^2 + (42 +19/2 -sin(16*pi/180)*13
 l_Conter = (sqrt((228.5 + cos(16*pi/180)*262)^2 + (42 +19/2 -sin(16*pi/180)*262)^2))*1e-3;
 l_Magnet = (sqrt((655 - 152 + 124*cos(60*pi/180))^2 + (42 +19 +124*sin(60*pi/180)^2)))*1e-3;
 l_Joint2 = (sqrt((42 + 19 + 18)^2 + (655)^2))*1e-3;
-l_Joint1 = (41 - 0.5*19. - 2)*1e-3;
+l_Joint1 = (41 - 19/2)*1e-3;
 
 %Horizontale Abstände der Körperschwerpunkte zu Joint1
 lG_MainArm = (655 - 915/2)*1e-3;
