@@ -2,7 +2,7 @@
 run('Linearize.m')
 
 % Weightmatrix
-Q=diag([500 20 20 50 1 1 10 20]); %alpha beta gamma alpha_d beta_d gamma_d 
+Q=diag([200 88 20 15 5 1 80 20]); %alpha beta gamma alpha_d beta_d gamma_d 
 R=diag([1 1]); 
 
 % Neu C_Matrix
