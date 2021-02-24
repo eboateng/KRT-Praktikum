@@ -27,4 +27,3 @@ observer_poles=[-23 -23.1 -23.2 -23.3 -23.4 -23.5];
 L=place(A',C', observer_poles); 
 L=L'; 
 
-sim('LQI_Regler_Blackbox')
