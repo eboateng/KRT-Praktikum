@@ -420,7 +420,7 @@ Die Zustandsrückkopplungssteuerung hat die Form
 
 Und $K \in \mathbb{R}^{2\times8}$.\\
 
-Das resultierende Gain $K _{LQI}(K _{LQR},K _{I})$ ist:\\[1.2 em]
+Das resultierende Gain $K _{LQI}=(K _{LQR},K _{I})$ ist:\\[1.2 em]
 %\begin{equation}{}
 K_{LQR}=\left[\begin{array}{llllll}
 		       -17.92& 8.33& 6.21 & -17.49 & 4.10& 1.27\\
@@ -496,7 +496,7 @@ Q=\left[\begin{array}{llllllll}
 \end{equation}
 
 \subsection{Beobachterentwurf}
-Da die Winkelgeschwindigkeiten des Helikopters nicht messbar sind, ist ein Beobachter erforderlich, welcher diese fehlenden Zustände schätzt. Der Luenberger Beobachter wird angewendet, um die Zustände zu rekonstruieren. Die Pole des Beobachters wurden nach diese Befehl: $p= min (real(EW))*3 $ ausgewählt. Die Pole p des Systems lautet:
+Da die Winkelgeschwindigkeiten des Helikopters nicht messbar sind, ist ein Beobachter erforderlich, welcher diese fehlenden Zustände schätzt. Der Luenberger Beobachter wird angewendet, um die Zustände zu rekonstruieren. Die Pole des Beobachters wurden von uns ausgewählt. Die Pole p des Systems lautet:
 \begin{equation}
 	p =\left[\begin{array}{c}
 		-23,-23.1,-23.2,-23.3,-23.4,-23.5
