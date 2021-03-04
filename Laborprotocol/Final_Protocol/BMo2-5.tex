@@ -59,7 +59,7 @@
 
 \begin{frontmatter}
 	
-\title{Gruppe B-Mo2: \\ Abschlussprotokoll des Praktikums}
+\title{Gruppe B-Mo2: \\ Abschlussprotokoll des KRT Praktikums}
 % include all authors, underline corresponding author
 \author{Yuchan Bian,} 
 \author{Jiaqi Qin,}
@@ -68,19 +68,19 @@
 
 \begin{abstract}                          % Abstract of not more than 250 words.
 Das vorliegende Protokoll beschreibt das Vorgehen des Praktikums Konzept der Regelungstechnik. Im Praktikum wird an einem 3-DOF Helikopter eine Regelungsaufgabe systematisch gelöst. Der Helikopter muss eine Trajektorie mit Beschränkungen wie Mindesthöhe abfliegen und eine Last von einem
-Landepunkt anderen transportieren. Die Modellierung des Systems erfolgte mithilfe des Drallsatzes. Das resultierende nichtlineare Modell wird um einen Arbeitspunkt linearisiert. Mittels des lineariserten Modells wird ein LQI-Regler entworfen. Die Erfüllung der Hauptaufgabe wird dann mit einer geplanten Solltrajektorie durchgeführt. Abschließend wurden die Reglerparameter optimiert, um ein gutes Ergebnis zu erzielen.
+Landepunkt zu einem anderen transportieren. Die Modellierung des Systems erfolgte mithilfe des Drallsatzes. Das resultierende nichtlineare Modell wird um einen Arbeitspunkt linearisiert. Mittels des lineariserten Modells wird ein LQI-Regler entworfen. Die Erfüllung der Hauptaufgabe wird dann mit einer geplanten Solltrajektorie durchgeführt. Abschließend wurden die Reglerparameter optimiert, um ein gutes Ergebnis zu erzielen.
 \end{abstract}
 
 \end{frontmatter}
 
 \section{Einleitung}
-Dieses Protokoll ist die Zusammenfassung der durchgeführten Schritte zur erfolgreichen Absolvierung des Praktikums im Wintersemseter 2020/21. Im ersten Kapitel wird die Aufgabestellung und der Versuchsaufbau vorgestellt. Anschließend wird die Modellierung und die Auslegung des Reglers beschrieben. Zuletzt wird das Ergebnis gezeigt.
+Dieses Protokoll ist die Zusammenfassung der durchgefuehrten Schritte zur erfolgreichen Absolvierung des Praktikums im WS 20/21. Im ersten Kapitel wird die Aufgabestellung und der Versuchsaufbau vorgestellt. Anschließend wird die Modellierung und die Auslegung des Reglers beschrieben. Zuletzt wird das Ergebnis gezeigt.
 
 \subsection{Aufgabenstellung}
 Ziel des Praktikums ist, wie in Abbildung 1 dargestellt, einen automatisierten Lastentransport zu realisieren. Der Helikopter soll die Aufgabe automatisch lösen können und dabei Mindesthöhen einhalten.
 
 \subsection{Versuchsaufbau}
-Der Versuchsaufbau ist in Abbildung 2 dargestellt. Darin wird das Koordinatensystem und die dazugehörigen Winkel definiert. Die Drehung um die $x$-Achse (Schwenkwinkel), $y$-Achse (Steigwinkel) und $z$-Achse (Nickwinkel) sind jeweils mit $\alpha$, $\beta$ und $\gamma$ bezeichnet. Der Helikopter verfügt über die zwei einzeln ansteuerbare Motoren (Frontmotor und Heckmotor). Die zugehörigen Spannungen werden entsprechend mit $U_F$ und $U_B$ bezeichnet.
+Der Versuchsaufbau ist in Abbildung 2 dargestellt. Darin wird das Koordinatensystem und die dazugehörigen Winkel definiert. Die Drehung um die $x$-Achse (Schwenkwinkel), $y$-Achse (Steigwinkel) und $z$-Achse (Nickwinkel) sind jeweils mit \alpha, \beta und \gamma bezeichnet. Der Helikopter verfügt über die zwei einzeln ansteuerbare Motoren (Frontmotor und Heckmotor). Die zugehörigen Spannungen werden entsprechend mit $U_F$ und $U_B$ bezeichnet.
 
 \begin{figure}
 	\begin{center} 
@@ -98,10 +98,10 @@ Der Versuchsaufbau ist in Abbildung 2 dargestellt. Darin wird das Koordinatensys
 
 
 \section{Modellierung}
-Der Reglerentwurf erfolgte anhand eine modellierte system des Helikopters. Folgenden Annahmen wurden verwendet, um die Komplexitätsgrad zu reduzieren vereinfachten Modell.
+Der Reglerentwurf erfolgte anhand eines modellierten System des Helikopters. Um die Komplexitätsgrad bei der Modellierung zu reduzieren wurden folgenden Annahmen verwendet.
 \begin{enumerate}
-\item Alle Lager werden als ideal angenommen.
-\item Die Geometrien der einzelnen Komponenten werden als starr und ideal angesehen
+\item Alle Lager wurden als ideal angenommen.
+\item Die Geometrien der einzelnen Komponenten wurden als starr und ideal angesehen
 \item Alle Massen drehen sich symmetrisch um die verschiedenen Drehachsen
 \item Die Rotation aller Massen erfolgt um den Schwerpunkt
 \end{enumerate}
@@ -159,19 +159,19 @@ F_f&F_b
 \end{bmatrix}
 \end{equation}
 
-Die bereitgestellte Helikopterdaten stellte die Beziehung zwischen der Spannung und der entsprechenden Änderung des Deltas der Massen dar. Mithilfe der Kurvenanpassungsbefehl \textit {polyfit} in Matlab konnte die Parameter der Kurve ermittelt.
+Die bereitgestellte Helikopterdaten stellte die Beziehung zwischen der Spannung und der entsprechenden Änderung des Deltas der Massen dar. Mithilfe der Kurvenanpassungsbefehl \textit{polyfit} in Matlab konnte die Parameter der Kurve ermittelt.
 Die berechnete Koeffizienten lautet:
 \\
 \begin{align}
-	F_f (U) &= 6.156*10^{-3}\\ %U^2 \\ %-0.1342U 	-0.13917\\
-	F_b (U) &= 4.704*10^{-3}  %U^2 	%+0.00510U 	-0.278
+	F_f (U) &= 6.156*10^{-2}\\ %U^2 \\ %-0.1342U 	-0.13917\\
+	F_b (U) &= 4.704*10^{-2}  %U^2 	%+0.00510U 	-0.278
 \end{align}
 
 Unter Verwendung der Gleichungen des vereinfachten physikalischen Modells des Hubschraubers, die in bereits diskutiert wurde, wird das Zustandsraummodell der Regelstrecke abgeleitet.
 
-$A_{lin}= 
+$A_{lin}=
 \left(\begin{array}{cccccc} 
-\multicolumn{3}{c}{\multirow{3}{*}{\emph{O_{3,3}}}}& \multicolumn{3}{c}{\multirow{3}{*}{\emph{I_3}}} &\\
+\multicolumn{3}{c}{\multirow{3}{*}{\emph{O_{3,3}}}}& \multicolumn{3}{c}{\multirow{3}{*}{\emph{I_3}}}&\\
  &  &  &  &  & \\
  &  &  &  &  & \\
  &  &  &  &  & \\
@@ -181,7 +181,7 @@ $A_{lin}=
 0 & 0 & \frac{0.887L_2 (F_f -F_b)}{\sigma_1 } & \multicolumn{3}{c}{\multirow{3}{*}{\emph{O_{3,3}}}} & & \\
 0 & \frac{0.462ML_2g - mL_1g}{\sigma_1 } &0 & & & \\[1.5 em]
 0 & 0 & 0 & & &
-\end{array}\right)\\[1.5 em]$
+\end{array}\right)$\\[1.5 em]
 {\text{mit  } $\sigma_1 = mL_1^2 + ML_2^2 $
 
 
@@ -191,13 +191,10 @@ $B_{lin} = \left(\begin{array}{cc}
  & \\
 \frac{L_2 }{mL_1^2 + ML_2^2 } & \frac{L_2 } {mL_1^2 +ML_2^2}\\[1.5 em]
 \frac{12.0}{mL_3} & -\frac{12.0}{mL_3} \\
-\end{array}\right)
+\end{array}\right)$
 
-\subsection{Systemeigenshachften}
-Beobachtbarkeit: Die linearisierten Matrizen (A, C) des Modells weisen einen vollen Rang auf. Dies deutet auf die Beobachtbarkeit der verschiedenen Zustandsmodi hin.
-
-Steuerbarkeit: Die linearisierten Matrizen von (A, B) des Modells weisen ebenfalls einen Rang n = 6 auf. Dies zeigt an, dass unser Modell steuerbar ist.
-
+\subsection{Systemeigenschaften}
+Beobachtbarkeit und Steuerbarkeit: Die Steuerbarkeit- und Beobachtbarkeitsmatrizen weisen einen vollen Rang auf. Dies deutet darauf dass das System beobachtbar und steuerbar ist. 
 %++++++++
 
 \section{Reglerentwurf}
@@ -306,6 +303,8 @@ mit der Anfangsbedingung
  \begin{equation}{}
 	\Delta{x}(0)=x(0)-\bar{x}
 \end{equation}
+
+
 %\subsection{Steuerbarkeit und Beobachtbarkeit}
 %Die Steuerbarkeit und Beobachtbarkeit von Systemen sind in Matlab gerechnet und sie haben beiden Vollrank. Das lineare System ist steuerbar und beobachtbar.
 %
