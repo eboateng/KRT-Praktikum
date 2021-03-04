@@ -469,7 +469,7 @@ Die Eigenwerte des geschlossenen Regelkreises ergeben sich zu:
 \end{equation}
 Die negativen Realteile der Eigenwerte zeigen alles asympotisch stabiles Verhalten des geschlossenen Regelkreises.
 
-Der LQI-Regler wird durch Matlab-Befehl ''lqi'' angewandet. Dieses Steuergesetz stellt sicher, dass die Ausgabe y die Referenztrajektorie r gut verfolgt. Bei MIMO-Systemen entspricht die Anzahl der Integratoren der Dimension der Ausgabe y. [K, S, e] = lqi (SYS, Q, R, N) berechnet die optimale Verstärkungsmatrix K unter Berücksichtigung eines Zustandsraummodells SYS für die Matrizen Q, R, N (In unseren System wählen wir N=0). u und y sind absolute Werte für das linearisiertes Modell. Aber $\Delta u$ und $\Delta y$ sollen für das nichtlinearisiertes Modell angewendet werden.
+Der LQI-Regler wird durch Matlab-Befehl ''lqi'' angewandet. Dieses Steuergesetz stellt sicher, dass die Ausgabe y die Referenztrajektorie r gut verfolgt. Bei MIMO-Systemen entspricht die Anzahl der Integratoren der Dimension der Ausgabe y. [K, S, e] = lqi (SYS, Q, R, N) berechnet die optimale Verstärkungsmatrix K unter Berücksichtigung eines Zustandsraummodells SYS für die Matrizen Q, R, N (In unseren System wählen wir N=0).
 
 %$Q=I_8$\\
 %
